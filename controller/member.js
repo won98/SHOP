@@ -38,4 +38,15 @@ module.exports = {
       console.log(error);
     }
   },
+  Information: async (req, res) => {
+    try {
+      const conn = await db.getConnection();
+      const sql = "SELECT *from member";
+      const [rows] = await conn.query(sql);
+      conn.release();
+      res.status(200).json({ result: rows });
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };
